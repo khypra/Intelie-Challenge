@@ -3,8 +3,15 @@ import * as React from "react";
 import JsonField from './components/jsonField/jsonField';
 
 function App() { 
+  callBackFunction = (childData) =>{
+
+  }
+
   return (
-    <JsonField></JsonField>
+    <div>
+      <JsonField id="inputField"></JsonField>
+      <button ></button>
+    </div>
   );
 }
 

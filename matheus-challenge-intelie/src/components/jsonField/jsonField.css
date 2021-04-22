@@ -26,6 +26,8 @@
   overflow: auto;
   border: none;
   min-height: 110px;
+  max-height: 60vh;
+  height: 300px;
 }
 
 /*textarea css*/
@@ -56,9 +58,20 @@
   height: 100%;
   width: 100%;
   resize: none;
-  background-color: rgb(239, 239, 239);
+  background-color: rgb(228, 228, 228);
   border: none;
   min-height: 100px;
+  opacity: 1;
+  background-image: none;
+}
+.jsonArea:hover {
+  background-image: url(json.png);
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+}
+.jsonArea:focus {
+  background-image: none;
 }
 
 /*Scrollbar css*/
