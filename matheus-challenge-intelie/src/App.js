@@ -1,16 +1,13 @@
-import './App.css';
+import "./App.css";
 import * as React from "react";
-import JsonField from './components/jsonField/jsonField';
+import Header from "./components/header/header";
+import ContextWrapper from "./components/contextWrapper/contextWrapper";
 
-function App() { 
-  callBackFunction = (childData) =>{
-
-  }
-
+function App() {
   return (
     <div>
-      <JsonField id="inputField"></JsonField>
-      <button ></button>
+      <Header></Header>
+      <ContextWrapper></ContextWrapper>
     </div>
   );
 }

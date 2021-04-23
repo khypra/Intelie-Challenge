@@ -25,7 +25,7 @@
   resize: vertical;
   overflow: auto;
   border: none;
-  min-height: 110px;
+  min-height: 170px;
   max-height: 60vh;
   height: 300px;
 }
@@ -63,6 +63,7 @@
   min-height: 100px;
   opacity: 1;
   background-image: none;
+  font-family: "Source Code Pro", "Source Sans Pro", sans-serif;
 }
 .jsonArea:hover {
   background-image: url(json.png);
