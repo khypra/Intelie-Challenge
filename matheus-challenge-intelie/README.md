@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Project Overview and Descriptions
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -34,10 +34,16 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 In this project, to help with css aligments and browser compatibility, were used the following references:
 external css and flexbox alignment with compatibility
 
-    # [auto-prefixer](https://autoprefixer.github.io/)
+    #[auto-prefixer](https://autoprefixer.github.io/)
 
-    # [Flexbox](https://flexbox.help/)
+    #[Flexbox](https://flexbox.help/)
 
-To utilize hooks i've installed the useGlobalEvent library, that accepts an event name to be attached to the window global object, then returns a handler setter for that event.
+For the Graph plotting i've choosen the Google Charts for react, that offers a compreensive interface with lots of chart options and personalization as well as easy implementation. #[Google charts](https://react-google-charts.com/)
 
-    # [Global Event](https://github.com/beautifulinteractions/beautiful-react-hooks/blob/master/docs/useGlobalEvent.md)
+The test library selected was Jest, because Jest runs tests in parallel which makes running the whole test suite so much faster. Also, you’ve got the possibility to use “--watch” and only run the tests affected by your changes in the editor
+
+    #[Jest](https://jestjs.io/docs/getting-started)
+
+For the type definition of the models, it was installed the TypeScript extension with npm that offers versatility with model definition and instance of model objects.
+
+    #[TypeScript](https://www.typescriptlang.org/)
