@@ -31,19 +31,31 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Project tools
 
-In this project, to help with css aligments and browser compatibility, were used the following references:
-external css and flexbox alignment with compatibility
+### In this project, to help with css aligments and browser compatibility, were used the following references:
 
-    #[auto-prefixer](https://autoprefixer.github.io/)
+External css, flexbox alignment and compatibility
 
-    #[Flexbox](https://flexbox.help/)
+#### [Auto-Prefixer](https://autoprefixer.github.io/)
 
-For the Graph plotting i've choosen the Google Charts for react, that offers a compreensive interface with lots of chart options and personalization as well as easy implementation. #[Google charts](https://react-google-charts.com/)
+#### [Flex Box](https://flexbox.help/)
+
+For the Chart plotting i've choosen the Google Charts for react, that offers a compreensive interface with lots of chart options and personalization as well as easy implementation.
+
+#### [Google Charts](https://react-google-charts.com/)
 
 The test library selected was Jest, because Jest runs tests in parallel which makes running the whole test suite so much faster. Also, you’ve got the possibility to use “--watch” and only run the tests affected by your changes in the editor
 
-    #[Jest](https://jestjs.io/docs/getting-started)
+#### [Jest](https://jestjs.io/docs/getting-started)
 
 For the type definition of the models, it was installed the TypeScript extension with npm that offers versatility with model definition and instance of model objects.
 
-    #[TypeScript](https://www.typescriptlang.org/)
+#### [TypeScript](https://www.typescriptlang.org/)
+
+## Complexity and Design Choices
+
+### Complexity
+
+To make a simplification of the complexity of the problem, we assume that all the variables in the problem (Select array size, Group array size, variations of each element of the group) have the same size N. So as defined, for each combination of group elements, we need to plot a point for a select element. Mathematically speaking we have N\*N permutations of group elements, and for each of them, N points, so we have N^3 points for each timestamp. If we have N variations of timestamps in a span of time, this complexity ups to N^4 points that needs to be plotted as well as approximately N^4 lines.
+So considering the wrost case scenario we will have approximately N^4 points and N^4 lines that will need to be plotted in the Chart.
+
+### Desing Choices
