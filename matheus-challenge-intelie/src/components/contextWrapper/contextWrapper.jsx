@@ -5,6 +5,7 @@ import Footer from "./footer/footer";
 import Chart from "./chart/chartPlotter";
 import Sequence from "../../models/sequence";
 import "./contextWrapper.css";
+import EventEmitter from "./eventEmitter";
 
 //wrapper component created to be the parent component to facilitate passage of props and function between child components.
 class ContextWrapper extends Component {
@@ -16,29 +17,43 @@ class ContextWrapper extends Component {
       labels: [],
     };
     //binds to pass functions as props to the child components, so the states can be shared
-    this.handlerToUpdate = this.handlerToUpdate.bind(this);
+
+    // this.handlerToUpdate = this.handlerToUpdate.bind(this);
     this.actionButton = this.actionButton.bind(this);
   }
-
-  //handler that when the jsonField is changed, will update the jsonField State with the content tiped
-  handlerToUpdate(event) {
-    this.setState({
-      jsonField: event.target.value,
+  componentDidMount() {
+    EventEmitter.on("textUpdate", (value) => {
+      this.dataReader(value);
     });
   }
+  componentWillUnmount() {
+    EventEmitter.off("textUpdate");
+  }
+  //handler that when the jsonField is changed, will update the jsonField State with the content tiped
+  // handlerToUpdate(event) {
+  //   this.setState({
+  //     jsonField: event.target.value,
+  //   });
+  // }
   //action of the button that when clicked, will take the jsonField State data and manipulate it to be in a propper json format, so it can be molded in a chart
   actionButton() {
+    EventEmitter.emit("onClickButton");
+  }
+
+  dataReader(value) {
     try {
+      //time validation to ensure that processing will not pass a certain time. it'll interupt the data reading and pass on the already completed sequences.
+      const startTime = +new Date();
       //chain functions to parse the string input into valid objects.
       let activeSequence;
       let activeGroup = [];
       let activeSelect = [];
       let sequences = [];
-      let labels = ["timestamp"];
+      let labels = ["Time Stamp"];
       let dataset = {};
       //formatting the string input to make it possible parsing to json, by removing the >>'<< character and surround all the characters with >>" "<<
       //then using the REGEX to find all entries that are surrounded with {} that simbolizes an object and mapping them into a list of objects.
-      let lines = this.state.jsonField
+      let lines = value
         .replaceAll("'", "")
         .replaceAll(/([a-z_]+)/g, '"$&"')
         .match(/\{[^}]+\}/g)
@@ -108,6 +123,15 @@ class ContextWrapper extends Component {
           //conditional that specifies that a sequence start without an stop is not valid.
           sequences.pop(activeSequence);
           activeSequence = undefined;
+        }
+
+        const nowTime = +new Date();
+        if (nowTime - startTime > 5000) {
+          if (typeof activeSequence.stop === "undefined") {
+            console.log("fudeu");
+            sequences.pop(activeSequence);
+            break;
+          }
         }
       }
 
