@@ -16,7 +16,7 @@
   align-items: stretch;
   -ms-flex-line-pack: start;
   align-content: flex-start;
-
+  width: -webkit-fill-available;
   background-color: rgb(90, 90, 90);
   padding-left: 10px;
 }

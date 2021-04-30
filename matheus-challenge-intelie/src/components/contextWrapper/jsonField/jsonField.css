@@ -26,7 +26,6 @@
   overflow: auto;
   border: none;
   min-height: 170px;
-  max-height: 60vh;
   height: 300px;
 }
 
@@ -56,7 +55,7 @@
   outline: none;
   size: fill;
   height: 100%;
-  width: 100%;
+  width: -webkit-fill-available;
   resize: none;
   background-color: rgb(228, 228, 228);
   border: none;

@@ -17,24 +17,18 @@ class ContextWrapper extends Component {
       labels: [],
     };
     //binds to pass functions as props to the child components, so the states can be shared
-
-    // this.handlerToUpdate = this.handlerToUpdate.bind(this);
     this.actionButton = this.actionButton.bind(this);
   }
   componentDidMount() {
+    //Event emitter that only ocours when the component is loaded and the button is pressed
     EventEmitter.on("textUpdate", (value) => {
       this.dataReader(value);
     });
   }
   componentWillUnmount() {
+    //Event closer, that prevent memory leaks
     EventEmitter.off("textUpdate");
   }
-  //handler that when the jsonField is changed, will update the jsonField State with the content tiped
-  // handlerToUpdate(event) {
-  //   this.setState({
-  //     jsonField: event.target.value,
-  //   });
-  // }
   //action of the button that when clicked, will take the jsonField State data and manipulate it to be in a propper json format, so it can be molded in a chart
   actionButton() {
     EventEmitter.emit("onClickButton");
@@ -53,6 +47,7 @@ class ContextWrapper extends Component {
       let dataset = {};
       //formatting the string input to make it possible parsing to json, by removing the >>'<< character and surround all the characters with >>" "<<
       //then using the REGEX to find all entries that are surrounded with {} that simbolizes an object and mapping them into a list of objects.
+      value = value.toLowerCase();
       let lines = value
         .replaceAll("'", "")
         .replaceAll(/([a-z_]+)/g, '"$&"')
@@ -124,11 +119,10 @@ class ContextWrapper extends Component {
           sequences.pop(activeSequence);
           activeSequence = undefined;
         }
-
+        //time constraint that if passes more than 3 seconds generating the sequences, it'll stop, pop the last incomplete sequence and send the data
         const nowTime = +new Date();
-        if (nowTime - startTime > 5000) {
+        if (nowTime - startTime > 3000) {
           if (typeof activeSequence.stop === "undefined") {
-            console.log("fudeu");
             sequences.pop(activeSequence);
             break;
           }
@@ -152,12 +146,15 @@ class ContextWrapper extends Component {
   render() {
     return (
       <React.Fragment>
-        <JsonField handlerToUpdate={this.handlerToUpdate}></JsonField>
-        <div className="bottomDiv">
+        <div>
+          <JsonField handlerToUpdate={this.handlerToUpdate}></JsonField>
           <Chart
             treatedSequences={this.state.treatedSequences}
             labels={this.state.labels}
           ></Chart>
+          <div id="ghostDiv" />
+        </div>
+        <div className="bottomDiv">
           <Footer actionButton={this.actionButton}></Footer>
         </div>
       </React.Fragment>
