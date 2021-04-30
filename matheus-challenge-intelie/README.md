@@ -90,3 +90,5 @@ SpanEvent extends SequenceEvent{
 begin: Number;
 end: Number;
 }
+
+The data structure of the sequence and some rules that weren't defined in the challenge were explained in the dataReader function of the contextWrapper class.
